@@ -1,0 +1,17 @@
+{
+	"presets": [
+		["@babel/preset-env", {
+			"debug": false,
+			"targets": {
+				"node": "current"
+			}
+    }],
+    "minify"
+	],
+  "retainLines": true,
+	"plugins": [
+		"transform-vue-jsx",
+    "@babel/plugin-syntax-dynamic-import",
+		"@babel/plugin-proposal-object-rest-spread"
+	]
+}
