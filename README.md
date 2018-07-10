@@ -4,7 +4,7 @@
 
 ----
 
-![./screenshots/context-menu.png](context-menu.png)
+![./screenshots/context-menu.png](./screenshots/context-menu.png)
 
 
-![./screenshots/popup.png](popup.png)
+![./screenshots/popup.png](./screenshots/popup.png)
