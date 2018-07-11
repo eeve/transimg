@@ -1,22 +1,21 @@
 <template>
-  <div class='history-list'>
-    <ul>
-      <li v-for='(item, index) in historyList' :key='item.storename'>
+  <div class='history-list' :class='{ "flex-center": noData }'>
+    <p v-if='noData'>你没有保存过图片</p>
+    <ul v-else>
+      <li v-for='(item, index) in historyList' :key='item.url'>
         <div class='item'>
-          <img :src='item.url' :alt='item.storename'>
+          <img :src='item.url' :alt='item.url'>
           <div class='mask'>
             <button @click='handleImageDelete(item.delete, index)'>删除</button>
             <button @click='handleImageCopy(item.url)'>复制</button>
           </div>
         </div>
-
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 import { sendMsg2MainProcess, ORIGINS } from '../lib'
 export default {
   data () {
@@ -24,28 +23,24 @@ export default {
       historyList: []
     }
   },
+  computed: {
+    noData () {
+      return this.historyList.length <= 0
+    }
+  },
   beforeMount () {
     this.initHistory()
   },
   methods: {
     async initHistory () {
-      const { data: res } = await axios.get('https://sm.ms/api/list')
-      if (res.code === 'success') {
-        const deleted = await sendMsg2MainProcess(ORIGINS.PP, { type: 'get_deleted_urls' })
-        this.historyList = (res.data || [])
-          .filter(item => !deleted.includes(item.delete))
-          .reverse()
-      }
+      this.historyList = await sendMsg2MainProcess(ORIGINS.PP, { type: 'get_history_list' })
     },
     handleImageCopy (url) {
       sendMsg2MainProcess(ORIGINS.PP, { type: 'copy_url', url })
     },
     async handleImageDelete (url, index) {
-      const { data } = await axios.get(url)
-      if (data.indexOf('File delete success') !== -1) {
-        sendMsg2MainProcess(ORIGINS.PP, { type: 'delete_url', url })
-        this.historyList.splice(index, 1)
-      }
+      const isDeleted = await sendMsg2MainProcess(ORIGINS.PP, { type: 'delete_url', url })
+      isDeleted && this.historyList.splice(index, 1)
     }
   }
 }
@@ -92,6 +87,17 @@ img {
     height: 28px;
     margin: 36px 0;
     font-size: 12px;
+  }
+}
+.flex-center {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+  p {
+    display: flex;
+    align-items: center;
+    opacity: .5;
   }
 }
 </style>

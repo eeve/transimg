@@ -13,8 +13,8 @@ export default [
   }),
   new CopyWebpackPlugin([
     {
-      from: 'icon.png',
-      to: 'icon.png'
+      from: 'icons/',
+      to: 'icons/'
     }
   ]),
   new ManifestPlugin({
@@ -22,8 +22,11 @@ export default [
     seed: {
       'manifest_version': 2,
       'name': '上传到图床',
-      'version': '1.0',
-      'description': '将图片上传到图床，得到图床的图片地址',
+      'short_name': 'transimg',
+      'version': '1.0.0',
+      'description': '右键将网页上的图片直接上传到图床，并得到图床的图片地址。简单、快速、好用，现支持微博和sm.ms图床。',
+      'author': 'eeve',
+      'homepage_url': 'https://eeve.me',
       'background': {
         'scripts': isProd ? [
           'background.js'
@@ -42,15 +45,17 @@ export default [
         'clipboardRead'
       ],
       'icons': {
-        '16': 'icon.png',
-        '48': 'icon.png',
-        '128': 'icon.png'
+        '16': './icons/icon16.png',
+        '32': './icons/icon32.png',
+        '48': './icons/icon48.png',
+        '128': './icons/icon128.png'
       },
       'browser_action': {
         'default_icon': {
-          '19': 'icon.png',
-          '38': 'icon.png',
-          '128': 'icon.png'
+          '16': './icons/icon16.png',
+          '32': './icons/icon32.png',
+          '48': './icons/icon48.png',
+          '128': './icons/icon128.png'
         },
         'default_title': '上传到图床',
         'default_popup': 'popup.html'

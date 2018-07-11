@@ -9,18 +9,22 @@ const resolve = (dir) => {
   return path.resolve(__dirname, '..', dir)
 }
 
+let entry = {
+  content: './content/index',
+  popup: './popup/index',
+  background: './background/index'
+}
+if (!isProd) {
+  entry.hot = './hot'
+}
+
 export default {
   context: resolve('app'),
   mode: process.env.NODE_ENV,
   devtool: isProd
     ? false
     : '#cheap-module-source-map',
-  entry: {
-    hot: './hot',
-    content: './content/index',
-    popup: './popup/index',
-    background: './background/index'
-  },
+  entry: entry,
   output: {
     path: resolve('dist'),
     publicPath: '/',

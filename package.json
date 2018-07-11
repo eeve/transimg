@@ -1,10 +1,10 @@
 {
   "name": "transimg",
   "version": "1.0.0",
-  "description": "一款chrome插件，能够将网页上的图片快速上传到图床",
+  "description": "将网页上的图片快速上传到图床，简单、快速、好用",
   "scripts": {
     "dev": "rimraf dist && cross-env NODE_ENV=development babel-node ./node_modules/.bin/webpack --watch --config build/webpack.config.js --progress --hide-modules",
-    "prod": "rimraf dist && cross-env NODE_ENV=production babel-node ./node_modules/.bin/webpack --config build/webpack.config.js --progress --hide-modules"
+    "prod": "rimraf dist && cross-env NODE_ENV=production babel-node ./node_modules/.bin/webpack --config build/webpack.config.js --progress --hide-modules && zip -q -r extension.zip dist"
   },
   "standard": {
     "parser": "babel-eslint",

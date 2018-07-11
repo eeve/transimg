@@ -9,5 +9,11 @@ export default {
     return new Promise(resolve => {
       chrome.storage.sync.set(value, resolve)
     })
+  },
+
+  remove (query) {
+    return new Promise(resolve => {
+      chrome.storage.sync.remove(query, resolve)
+    })
   }
 }
