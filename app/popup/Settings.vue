@@ -83,14 +83,14 @@ export default {
 }
 .control:hover input ~ .control__indicator,
 .control input:focus ~ .control__indicator {
-  background: #ccc;
+  background: #eee;
 }
 .control input:checked ~ .control__indicator {
-  background: #2aa1c0;
+  background: #1296db;
 }
 .control:hover input:not([disabled]):checked ~ .control__indicator,
 .control input:checked:focus ~ .control__indicator {
-  background: #0e647d;
+  background: #1085c4;
 }
 .control input:disabled ~ .control__indicator {
   background: #e6e6e6;
@@ -131,7 +131,7 @@ export default {
   outline: 0;
   border: 0;
   border-radius: 0;
-  background: #e6e6e6;
+  background: #efefef;
   color: #7b7b7b;
   appearance: none;
   -webkit-appearance: none;
@@ -142,8 +142,8 @@ export default {
 }
 .select select:hover,
 .select select:focus {
-  color: #000;
-  background: #ccc;
+  color: #444;
+  background: #eee;
 }
 .select select:disabled {
   opacity: 0.5;
