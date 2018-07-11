@@ -58,7 +58,7 @@ chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
       } else if (request.message.type === 'update_cfg') {
         if (request.message.cfg.use === 'weibo') {
           // 检测是否登录了微博(随便上传一张图片试试)
-          weibo.upload('https://h5.sinaimg.cn/upload/2016/05/23/319/hy_gray_s2.png')
+          weibo.upload('https://h5.sinaimg.cn/upload/2016/05/23/319/hy_gray_s2.png', false)
             .catch(() => {
               window.alert('需要登录微博才能正常使用微博图床，请登录微博~')
               chrome.tabs.create({ url: 'http://weibo.com/?topnav=1&mod=logo' })
