@@ -2,21 +2,25 @@ import webpack from 'webpack'
 import ManifestPlugin from 'webpack-manifest-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import VueLoaderPlugin from 'vue-loader/lib/plugin'
 
 const isProd = process.env.NODE_ENV === 'production'
 
 export default [
+  new VueLoaderPlugin(),
   new HtmlWebpackPlugin({
     chunks: ['popup'],
     filename: 'popup.html',
     template: 'popup/index.html'
   }),
-  new CopyWebpackPlugin([
-    {
-      from: 'icons/',
-      to: 'icons/'
-    }
-  ]),
+  new CopyWebpackPlugin({
+    patterns: [
+      {
+        from: 'icons/',
+        to: 'icons/'
+      }
+    ]
+  }),
   new ManifestPlugin({
     writeToFileEmit: true,
     seed: {

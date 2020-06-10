@@ -89,7 +89,7 @@ export class WeiboUpload extends Upload {
     const { dataURL, type } = await url2base64(url)
     const form = new FormData()
     form.append('b64_data', dataURL.split(',').pop())
-    const { data: resText } = await axios.post('http://picupload.service.weibo.com/interface/pic_upload.php?ori=1&mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=1&app=miniblog', form) // { code: "success", data: {} }
+    const { data: resText } = await axios.post('https://picupload.weibo.com/interface/pic_upload.php?ori=1&mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=1&app=miniblog', form) // { code: "success", data: {} }
     const res = JSON.parse(resText.split('\n').pop())
     const imgurl = this._pid2url({ pid: res.data.pics.pic_1.pid, ext: type.indexOf('data:image/gif') !== -1 ? '.gif' : '.jpg' })
     save && this._save({ url: imgurl, delete: imgurl })
